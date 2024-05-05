@@ -1,0 +1,30 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--bg-color: #222;
+	--font-color: #fff;
+	--inverted-bg-color: #fff;
+	--inverted-font-color: #222;
+	--secondary-font-color: #aaa;
+}
+
+body {
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+	line-height: 1.5;
+	background-color: var(--bg-color);
+	color: var(--font-color);
+	font-size: 1.25rem;
+}
+
+img,
+svg {
+	display: block;
+}
+
+a {
+	color: inherit;
+}

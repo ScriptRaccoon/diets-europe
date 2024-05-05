@@ -1,0 +1,102 @@
+[
+	{
+		"country": "Austria",
+		"diet": {
+			"omnivore": 61,
+			"flexitarian": 30,
+			"pescetarian": 3,
+			"vegetarian": 5,
+			"vegan": 2
+		}
+	},
+	{
+		"country": "Denmark",
+		"diet": {
+			"omnivore": 56,
+			"flexitarian": 35,
+			"pescetarian": 2,
+			"vegetarian": 5,
+			"vegan": 2
+		}
+	},
+	{
+		"country": "France",
+		"diet": {
+			"omnivore": 65,
+			"flexitarian": 27,
+			"pescetarian": 4,
+			"vegetarian": 4,
+			"vegan": 2
+		}
+	},
+	{
+		"country": "Germany",
+		"diet": {
+			"omnivore": 58,
+			"flexitarian": 30,
+			"pescetarian": 3,
+			"vegetarian": 7,
+			"vegan": 3
+		}
+	},
+	{
+		"country": "Italy",
+		"diet": {
+			"omnivore": 67,
+			"flexitarian": 25,
+			"pescetarian": 3,
+			"vegetarian": 5,
+			"vegan": 1
+		}
+	},
+	{
+		"country": "Netherlands",
+		"diet": {
+			"omnivore": 48,
+			"flexitarian": 42,
+			"pescetarian": 4,
+			"vegetarian": 5,
+			"vegan": 2
+		}
+	},
+	{
+		"country": "Poland",
+		"diet": {
+			"omnivore": 68,
+			"flexitarian": 24,
+			"pescetarian": 2,
+			"vegetarian": 5,
+			"vegan": 1
+		}
+	},
+	{
+		"country": "Romania",
+		"diet": {
+			"omnivore": 54,
+			"flexitarian": 40,
+			"pescetarian": 3,
+			"vegetarian": 3,
+			"vegan": 1
+		}
+	},
+	{
+		"country": "Spain",
+		"diet": {
+			"omnivore": 62,
+			"flexitarian": 30,
+			"pescetarian": 2,
+			"vegetarian": 3,
+			"vegan": 3
+		}
+	},
+	{
+		"country": "United Kingdom",
+		"diet": {
+			"omnivore": 65,
+			"flexitarian": 23,
+			"pescetarian": 3,
+			"vegetarian": 6,
+			"vegan": 3
+		}
+	}
+]
