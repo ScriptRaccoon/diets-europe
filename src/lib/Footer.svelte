@@ -14,7 +14,7 @@
 		font-size: 1rem;
 		color: var(--secondary-font-color);
 		max-width: 35rem;
-		margin: 0 auto;
-		line-height: 1.25;
+		margin-inline: auto;
+		padding-inline: 1rem;
 	}
 </style>

@@ -6,11 +6,13 @@
 <style>
 	header {
 		padding-block: 1.75rem 1rem;
+		padding-inline: 1rem;
 		text-align: center;
 	}
 
 	h1 {
 		font-size: 2.5rem;
+		margin-bottom: 0.5rem;
 	}
 
 	p {

@@ -12,19 +12,12 @@
 	let selectedCountry = null
 	let countryData = []
 
-	const mercatorProjection = geoMercator()
-		.center([12, 51])
-		.scale(800)
-		.translate([width / 2, height / 2])
-
-	const pathGenerator = geoPath().projection(mercatorProjection)
-
 	const colorInterpolator = interpolateRgb("red", "green")
 
 	const EUROPE_GEO_JSON_PATH =
 		"https://raw.githubusercontent.com/leakyMirror/map-of-europe/master/GeoJSON/europe.geojson"
 
-	async function getCountryGeoData() {
+	async function getCountryGeoData(pathGenerator) {
 		try {
 			const response = await fetch(EUROPE_GEO_JSON_PATH)
 			const data = await response.json()
@@ -68,7 +61,14 @@
 	}
 
 	async function getCountryData() {
-		const countryGeoData = await getCountryGeoData()
+		const mercatorProjection = geoMercator()
+			.center([12, 51])
+			.scale(800)
+			.translate([width / 2, height / 2])
+
+		const pathGenerator = geoPath().projection(mercatorProjection)
+
+		const countryGeoData = await getCountryGeoData(pathGenerator)
 		const diets = await getDietData()
 		if (!diets | !countryGeoData) return []
 		return countryGeoData.map((countryGeo) => {
@@ -96,7 +96,7 @@
 
 <div class="map">
 	{#if countryData.length > 0}
-		<svg {width} {height}>
+		<svg width="100%" viewBox="0 0 {width} {height}">
 			{#each countryData as country}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<!-- svelte-ignore a11y-mouse-events-have-key-events -->
@@ -123,6 +123,9 @@
 		display: flex;
 		justify-content: center;
 		margin-block: 0.5rem;
+		max-width: 52rem;
+		margin-inline: auto;
+		padding-inline: 1rem;
 	}
 
 	svg {

@@ -70,7 +70,6 @@
 
 	.list {
 		margin-left: 1.25rem;
-		line-height: 1.25;
 	}
 
 	.percentage {
