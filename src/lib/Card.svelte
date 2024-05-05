@@ -1,5 +1,6 @@
 <script>
 	import { fade } from "svelte/transition"
+	import { HAS_TOUCH_SCREEN } from "./config"
 
 	export let country = null
 
@@ -25,10 +26,11 @@
 	<div
 		class="card"
 		style:--top={mousePos.y + "px"}
-		style:--left={mousePos.x + 15 + "px"}
+		style:--left={HAS_TOUCH_SCREEN ? "0px" : mousePos.x + 15 + "px"}
 		transition:fade={{ duration: 200 }}
 	>
 		<h2 class="title">{country.name}</h2>
+
 		<div class="content">
 			{#if country.diet}
 				<ul class="list">

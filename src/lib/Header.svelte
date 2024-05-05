@@ -1,6 +1,12 @@
+<script>
+	import { HAS_TOUCH_SCREEN } from "./config"
+
+	$: action = HAS_TOUCH_SCREEN ? "Tab on " : "Hover over"
+</script>
+
 <header>
 	<h1>Diets in Europe</h1>
-	<p>Hover over a country to find out its dietary preferences*.</p>
+	<p>{action} a country to find out its dietary preferences*.</p>
 </header>
 
 <style>

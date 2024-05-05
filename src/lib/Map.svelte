@@ -2,7 +2,11 @@
 	import { geoPath, geoMercator, interpolateRgb, scaleLinear } from "d3"
 	import { onMount } from "svelte"
 	import Card from "./Card.svelte"
-	import { EUROPE_GEO_JSON_PATH, MAP_CONFIG } from "./config"
+	import {
+		EUROPE_GEO_JSON_PATH,
+		HAS_TOUCH_SCREEN,
+		MAP_CONFIG,
+	} from "./config"
 	import { MAX_VEGAN_SCORE, MIN_VEGAN_SCORE, getVeganScore } from "./score"
 
 	const colorInterpolator = interpolateRgb("red", "green")
@@ -76,23 +80,40 @@
 		countryData = await getCountryData()
 	}
 
+	function handleClick(e) {
+		const clickedOutside = e.target.nodeName.toLowerCase() !== "path"
+		if (clickedOutside) unselectCountry()
+	}
+
 	onMount(setCountryData)
 </script>
 
+<svelte:document on:click={handleClick} />
+
 <div class="map">
 	{#if countryData.length > 0}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<svg width="100%" viewBox="0 0 {MAP_CONFIG.WIDTH} {MAP_CONFIG.HEIGHT}">
 			{#each countryData as country}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<!-- svelte-ignore a11y-mouse-events-have-key-events -->
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<path
 					d={country.path}
 					fill={getCountryColor(country)}
 					stroke="#222"
-					on:mouseover={() => selectCountry(country)}
-					on:mouseleave={unselectCountry}
+					on:mouseover={() => {
+						!HAS_TOUCH_SCREEN && selectCountry(country)
+					}}
+					on:mouseleave={() => {
+						!HAS_TOUCH_SCREEN && unselectCountry()
+					}}
+					on:click={() => {
+						HAS_TOUCH_SCREEN && selectCountry(country)
+					}}
 					style:--color={getCountryColor(country)}
-					class:hasData={Boolean(country.diet)}
+					class:selected={selectedCountry === country}
 				/>
 			{/each}
 		</svg>
@@ -125,7 +146,7 @@
 		fill: var(--country-color);
 	}
 
-	path:hover {
+	path.selected {
 		fill: var(--color);
 	}
 

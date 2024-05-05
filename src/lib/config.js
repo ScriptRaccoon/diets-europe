@@ -7,3 +7,8 @@ export const MAP_CONFIG = {
 	CENTER: [12, 51],
 	SCALE: 800,
 }
+
+export const HAS_TOUCH_SCREEN =
+	"ontouchstart" in window ||
+	navigator.maxTouchPoints > 0 ||
+	navigator.msMaxTouchPoints > 0
