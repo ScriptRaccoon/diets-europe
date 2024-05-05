@@ -2,20 +2,31 @@
 	import { geoPath, geoMercator, interpolateRgb, scaleLinear } from "d3"
 	import { onMount } from "svelte"
 	import Card from "./Card.svelte"
+	import { EUROPE_GEO_JSON_PATH, MAP_CONFIG } from "./config"
+	import { MAX_VEGAN_SCORE, MIN_VEGAN_SCORE, getVeganScore } from "./score"
 
-	const MAX_VEGAN_SCORE = 200
-	const MIN_VEGAN_SCORE = 0
-
-	const width = 750
-	const height = 650
+	const colorInterpolator = interpolateRgb("red", "green")
 
 	let selectedCountry = null
 	let countryData = []
 
-	const colorInterpolator = interpolateRgb("red", "green")
+	function selectCountry(country) {
+		selectedCountry = country
+	}
 
-	const EUROPE_GEO_JSON_PATH =
-		"https://raw.githubusercontent.com/leakyMirror/map-of-europe/master/GeoJSON/europe.geojson"
+	function unselectCountry() {
+		selectedCountry = null
+	}
+
+	async function getDietData() {
+		try {
+			const response = await fetch("diets.json")
+			return await response.json()
+		} catch (err) {
+			console.error(err)
+			return null
+		}
+	}
 
 	async function getCountryGeoData(pathGenerator) {
 		try {
@@ -31,46 +42,18 @@
 		}
 	}
 
-	function getVeganScore(countryDiet) {
-		return (
-			countryDiet.vegan * 2 +
-			countryDiet.vegetarian * 1 +
-			countryDiet.pescetarian * 0.5 +
-			countryDiet.flexitarian * 0.25 +
-			countryDiet.omnivore * 0
-		)
-	}
-
-	function selectCountry(country) {
-		selectedCountry = country
-	}
-
-	function unselectCountry() {
-		selectedCountry = null
-	}
-
-	async function getDietData() {
-		try {
-			const response = await fetch("diets.json")
-			const dietData = await response.json()
-			return dietData
-		} catch (err) {
-			console.error(err)
-			return null
-		}
-	}
-
 	async function getCountryData() {
 		const mercatorProjection = geoMercator()
-			.center([12, 51])
-			.scale(800)
-			.translate([width / 2, height / 2])
+			.center(MAP_CONFIG.CENTER)
+			.scale(MAP_CONFIG.SCALE)
+			.translate([MAP_CONFIG.WIDTH / 2, MAP_CONFIG.HEIGHT / 2])
 
 		const pathGenerator = geoPath().projection(mercatorProjection)
-
 		const countryGeoData = await getCountryGeoData(pathGenerator)
 		const diets = await getDietData()
+
 		if (!diets | !countryGeoData) return []
+
 		return countryGeoData.map((countryGeo) => {
 			const diet =
 				diets.find((diet) => diet.country === countryGeo.name)?.diet ??
@@ -89,14 +72,16 @@
 		return colorInterpolator(hue)
 	}
 
-	onMount(async () => {
+	async function setCountryData() {
 		countryData = await getCountryData()
-	})
+	}
+
+	onMount(setCountryData)
 </script>
 
 <div class="map">
 	{#if countryData.length > 0}
-		<svg width="100%" viewBox="0 0 {width} {height}">
+		<svg width="100%" viewBox="0 0 {MAP_CONFIG.WIDTH} {MAP_CONFIG.HEIGHT}">
 			{#each countryData as country}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<!-- svelte-ignore a11y-mouse-events-have-key-events -->
