@@ -24,7 +24,7 @@
 {#if country}
 	<div
 		class="card"
-		style:--top={mousePos.y - 5 + "px"}
+		style:--top={mousePos.y + "px"}
 		style:--left={mousePos.x + 15 + "px"}
 		transition:fade={{ duration: 200 }}
 	>
@@ -53,11 +53,10 @@
 		position: absolute;
 		top: var(--top);
 		left: var(--left);
-		background-color: var(--inverted-bg-color);
-		color: var(--inverted-font-color);
+		background-color: var(--bg-color);
 		padding: 1rem 1.5rem 1rem 1rem;
 		border-radius: 0.25rem 0.25rem 1rem 0.25rem;
-		box-shadow: 0.2rem 0.2rem 1rem #0002;
+		box-shadow: 0.2rem 0.2rem 1rem #0007;
 	}
 
 	.title {
