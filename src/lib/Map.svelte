@@ -106,10 +106,8 @@
 					stroke="#222"
 					on:mouseover={() => selectCountry(country)}
 					on:mouseleave={unselectCountry}
-					style="opacity: {selectedCountry &&
-					selectedCountry.name != country.name
-						? 0.5
-						: 1}"
+					style:--color={getCountryColor(country)}
+					class:hasData={Boolean(country.diet)}
 				/>
 			{/each}
 		</svg>
@@ -128,16 +126,22 @@
 	}
 
 	svg {
-		background-color: rgb(108, 174, 199);
 		border-radius: 0.5rem;
+		transition: background-color 200ms linear;
+		background-color: var(--water-color);
 	}
 
 	path {
 		transition: opacity 200ms linear;
 		cursor: pointer;
+		fill: var(--country-color);
 	}
 
 	path:hover {
-		fill: red;
+		fill: var(--color);
+	}
+
+	svg:has(path:hover) {
+		background-color: transparent;
 	}
 </style>
