@@ -149,8 +149,4 @@
 	path.selected {
 		fill: var(--color);
 	}
-
-	svg:has(path:hover) {
-		background-color: transparent;
-	}
 </style>
