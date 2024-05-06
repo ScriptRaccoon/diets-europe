@@ -136,13 +136,12 @@
 
 	svg {
 		border-radius: 0.5rem;
-		transition: background-color 200ms linear;
 		background-color: var(--water-color);
 	}
 
 	path {
-		transition: opacity 200ms linear;
 		cursor: pointer;
+		transition: fill 200ms ease;
 		fill: var(--country-color);
 	}
 
