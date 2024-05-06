@@ -80,15 +80,15 @@
 		countryData = await getCountryData()
 	}
 
-	function handleClick(e) {
-		const clickedOutside = e.target.nodeName.toLowerCase() !== "path"
-		if (clickedOutside) unselectCountry()
-	}
+	// function handleClick(e) {
+	// 	const clickedOutside = e.target.nodeName.toLowerCase() !== "path"
+	// 	if (clickedOutside) unselectCountry()
+	// }
 
 	onMount(setCountryData)
 </script>
 
-<svelte:document on:click={handleClick} />
+<!-- <svelte:document on:click={handleClick} /> -->
 
 <div class="map">
 	{#if countryData.length > 0}
@@ -104,13 +104,13 @@
 					fill={getCountryColor(country)}
 					stroke="#222"
 					on:mouseover={() => {
-						!HAS_TOUCH_SCREEN && selectCountry(country)
+						if (!HAS_TOUCH_SCREEN) selectCountry(country)
 					}}
 					on:mouseleave={() => {
-						!HAS_TOUCH_SCREEN && unselectCountry()
+						if (!HAS_TOUCH_SCREEN) unselectCountry()
 					}}
 					on:click={() => {
-						HAS_TOUCH_SCREEN && selectCountry(country)
+						if (HAS_TOUCH_SCREEN) selectCountry(country)
 					}}
 					style:--color={getCountryColor(country)}
 					class:selected={selectedCountry === country}
@@ -122,7 +122,7 @@
 	{/if}
 </div>
 
-<Card country={selectedCountry} />
+<Card country={selectedCountry} {unselectCountry} />
 
 <style>
 	.map {

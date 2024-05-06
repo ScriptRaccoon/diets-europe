@@ -10,6 +10,7 @@
 	--secondary-font-color: #aaa;
 	--country-color: rgb(109, 170, 40);
 	--water-color: rgb(145, 199, 218);
+	--btn-color: #444;
 }
 
 body {
@@ -26,4 +27,19 @@ svg {
 
 a {
 	color: inherit;
+}
+
+button {
+	cursor: pointer;
+	font: inherit;
+	color: inherit;
+	border: none;
+	background: none;
+}
+
+.button {
+	padding: 0.2rem 0.4rem;
+	background-color: var(--btn-color);
+	font-size: 1rem;
+	border-radius: 0.25rem;
 }
