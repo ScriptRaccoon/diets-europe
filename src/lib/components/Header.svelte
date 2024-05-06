@@ -1,5 +1,5 @@
 <script>
-	import { HAS_TOUCH_SCREEN } from "./config"
+	import { HAS_TOUCH_SCREEN } from "../config.js"
 
 	$: action = HAS_TOUCH_SCREEN ? "Tab on " : "Hover over"
 </script>
@@ -12,7 +12,7 @@
 <style>
 	header {
 		padding-block: 1.75rem 1rem;
-		padding-inline: 1rem;
+		padding-inline: var(--pad);
 		text-align: center;
 	}
 

@@ -1,7 +1,7 @@
 <script>
-	import Header from "./lib/Header.svelte"
-	import Footer from "./lib/Footer.svelte"
-	import Map from "./lib/Map.svelte"
+	import Header from "./lib/components/Header.svelte"
+	import Footer from "./lib/components/Footer.svelte"
+	import Map from "./lib/components/Map.svelte"
 </script>
 
 <svelte:head>
@@ -15,3 +15,9 @@
 </main>
 
 <Footer />
+
+<style>
+	main {
+		padding-inline: var(--pad);
+	}
+</style>

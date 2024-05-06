@@ -1,6 +1,7 @@
 <script>
+	import { onDestroy, onMount } from "svelte"
 	import { fade } from "svelte/transition"
-	import { HAS_TOUCH_SCREEN } from "./config"
+	import { HAS_TOUCH_SCREEN } from "../config.js"
 
 	export let country = null
 	export let unselectCountry = () => {}
@@ -13,16 +14,26 @@
 		omnivore: "Omnivores",
 	}
 
-	let mousePos = { x: 0, y: 0 }
+	const mousePos = { x: 0, y: 0 }
 
 	function handleMouseMove(e) {
 		if (HAS_TOUCH_SCREEN) return
 		mousePos.x = e.clientX
 		mousePos.y = e.clientY
 	}
-</script>
 
-<svelte:window on:mousemove={handleMouseMove} />
+	onMount(() => {
+		if (!HAS_TOUCH_SCREEN) {
+			window.addEventListener("mousemove", handleMouseMove)
+		}
+	})
+
+	onDestroy(() => {
+		if (!HAS_TOUCH_SCREEN) {
+			window.removeEventListener("mousemove", handleMouseMove)
+		}
+	})
+</script>
 
 {#if country}
 	<div
@@ -66,12 +77,12 @@
 
 <style>
 	.card {
-		background-color: var(--bg-color);
-		padding: 0.5rem 1rem;
+		padding: 0.5rem 0rem;
 	}
 
 	.card.floating {
 		position: absolute;
+		background-color: var(--bg-color);
 		top: var(--top);
 		left: var(--left);
 		padding: 1rem 1.5rem 1rem 1rem;

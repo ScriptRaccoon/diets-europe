@@ -15,6 +15,6 @@
 		color: var(--secondary-font-color);
 		max-width: 35rem;
 		margin-inline: auto;
-		padding-inline: 1rem;
+		padding-inline: var(--pad);
 	}
 </style>

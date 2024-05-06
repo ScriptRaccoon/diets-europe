@@ -6,8 +6,12 @@
 		EUROPE_GEO_JSON_PATH,
 		HAS_TOUCH_SCREEN,
 		MAP_CONFIG,
-	} from "./config"
-	import { MAX_VEGAN_SCORE, MIN_VEGAN_SCORE, getVeganScore } from "./score"
+	} from "../config.js"
+	import {
+		MAX_VEGAN_SCORE,
+		MIN_VEGAN_SCORE,
+		getVeganScore,
+	} from "../score.js"
 
 	const colorInterpolator = interpolateRgb("red", "green")
 
@@ -80,20 +84,11 @@
 		countryData = await getCountryData()
 	}
 
-	// function handleClick(e) {
-	// 	const clickedOutside = e.target.nodeName.toLowerCase() !== "path"
-	// 	if (clickedOutside) unselectCountry()
-	// }
-
 	onMount(setCountryData)
 </script>
 
-<!-- <svelte:document on:click={handleClick} /> -->
-
 <div class="map">
 	{#if countryData.length > 0}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<svg width="100%" viewBox="0 0 {MAP_CONFIG.WIDTH} {MAP_CONFIG.HEIGHT}">
 			{#each countryData as country}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -131,7 +126,6 @@
 		margin-block: 0.5rem;
 		max-width: 52rem;
 		margin-inline: auto;
-		padding-inline: 1rem;
 	}
 
 	svg {
